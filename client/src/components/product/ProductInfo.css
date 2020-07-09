@@ -1,0 +1,19 @@
+.article-title {
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.article-page {
+    padding: 20px;
+    min-height: 600px;
+}
+
+.article-price {
+    color: red;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.image-article {
+    height: 200px;
+}
