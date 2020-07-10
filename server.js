@@ -4,12 +4,18 @@ const cors = require("cors");
 const passport = require("passport");
 const path = require("path");
 
-const db = require("./config/db");
-
 const app = express();
 
+// Configuring dotenv for development only
+const env = process.env.NODE_ENV || "development";
+if(env === "development") {
+    require("dotenv").config();
+}
+
 // DB
+const db = require("./config/db");
 db();
+
 
 // MIDDLEWARE
 app.use(express.json());
@@ -30,6 +36,7 @@ if(process.env.NODE_ENV === "production") {
         res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
     });
 }
+
 
 
 const PORT = process.env.PORT || 5000;

@@ -1,8 +1,9 @@
 const LocalStrategy = require("passport-local").Strategy;
 const JwtStrategy = require("passport-jwt").Strategy;
 const bcrypt = require("bcryptjs");
-const config = require("config");
+// const config = require("config");
 const passport = require("passport");
+const secret = process.env.secret;
 
 const User = require("../models/User");
 
@@ -17,7 +18,7 @@ const cookieExtractor = req => {
 
 passport.use(new JwtStrategy({
     jwtFromRequest: cookieExtractor,
-    secretOrKey: config.get("secret")
+    secretOrKey: secret
 }, (payload, done) => {
     User.findById(payload.sub)
         .then((user) => {

@@ -1,6 +1,0 @@
-{
-    "db": {
-        "uri": "mongodb+srv://Brunnic:Akramos2009@gamesshop.pyran.mongodb.net/GamesShop?retryWrites=true&w=majority"
-    },
-    "secret": "THISISASECRETDONOTSHAREWITHANYONE"
-}

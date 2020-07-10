@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
 const config = require("config");
 
+const uri = process.env.MongoURI;
+
 
 module.exports = () => {
-    mongoose.connect(config.get("db.uri"), { useNewUrlParser: true, useUnifiedTopology: true})
+    mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true})
         .then(() => console.log("DB initialised"))
         .catch((err) => console.log(err.message));
 }

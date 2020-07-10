@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const { check, validationResult } = require("express-validator");
-const config = require("config");
+// const config = require("config");
 const passportConfig = require("../../utils/passport");
 const passport = require("passport");
 const JWT = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const secret = process.env.secret;
 
 const User = require("../../models/User");
 
@@ -12,7 +13,7 @@ const signToken = userId => {
     return JWT.sign({
       iss: "Brunnic",
       sub: userId
-    }, config.get("secret"), { expiresIn: "3h" })
+    }, secret, { expiresIn: "3h" })
 };
 
 /*
