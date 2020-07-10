@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const { check, validationResult } = require("express-validator");
-// const config = require("config");
 const passportConfig = require("../../utils/passport");
 const passport = require("passport");
 const JWT = require("jsonwebtoken");

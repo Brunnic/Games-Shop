@@ -18,11 +18,15 @@ export default function(state = initialState, action) {
     switch(type) {
         case GET_CART:
         case ADD_TO_CART:
-        case DELETE_FROM_CART:
             return {
                 ...state,
                 loading: false,
                 cart: payload
+            }
+        case DELETE_FROM_CART:
+            return {
+                ...state,
+                loading: false,
             }
         case CLEAR_CART:
             return {

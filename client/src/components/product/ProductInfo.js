@@ -23,19 +23,27 @@ const ProductInfo = ({ match, product, getProduct, loading, addToCart }) => {
         <div>
             {loading ? "Loading..." : 
             <section className="row justify-content-center section">
-                <div className="col-md-9 article-info article-page">
+                <div className="col-md-9 article-info article-page rounded">
                     <div className="row">
                         <div className="col-md-4">
                             {/* Carousel */}
                             <div id="carouselExampleControls" data-ride="carousel" className="carousel slide">
+                                <ol className="carousel-indicators">
+                                    {product.imgs.map((img, i) => (
+                                        i ===0 ? (
+                                            <li key={i} data-target="#carouselExampleControls" data-slide-to={i} className="active" ></li>
+                                        ) :
+                                        <li key={i} data-target="#carouselExampleControls" data-slide-to={i}></li>
+                                    ))}
+                                </ol>
                                 <div className="carousel-inner">
                                     {product.imgs.map((img, i) => (
                                         i === 0 ? (
-                                            <div key={i} className="carousel-item active">
+                                            <div key={i} className="carousel-item active" data-interval="3000">
                                                 <img src={img} alt="" className="d-block w-100 image-article"/>
                                             </div>
                                         ) :
-                                        <div key={i} className="carousel-item">
+                                        <div key={i} className="carousel-item" data-interval="3000">
                                             <img src={img} alt="" className="d-block w-100 image-article"/>
                                         </div>
                                     ))}
@@ -64,16 +72,16 @@ const ProductInfo = ({ match, product, getProduct, loading, addToCart }) => {
                             }} className="btn btn-warning ml-3">Add To Cart</div>
                         </div>
                         <hr/>
-                        <div className="col-12 mt-3">
+                        <div className="col-12 mt-3 text-dark">
                             <h3>Description</h3>
                             <p className="article-desc">
                                 {product.info.desc}
                             </p>
                             <hr/>
                             <h3>Config</h3>
-                            <p className="article-config">
-                                {product.info.config}
-                            </p>
+                            <div className="article-config" dangerouslySetInnerHTML={{__html: product.info.config}}>
+                                
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,6 @@
 const LocalStrategy = require("passport-local").Strategy;
 const JwtStrategy = require("passport-jwt").Strategy;
 const bcrypt = require("bcryptjs");
-// const config = require("config");
 const passport = require("passport");
 const secret = process.env.secret;
 

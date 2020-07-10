@@ -14,6 +14,7 @@ import Register from "./components/auth/RegisterForm.component";
 import AddProduct from './components/product/AddProduct';
 import ProductInfo from './components/product/ProductInfo';
 import Cart from './components/cart/Cart';
+import Dashboard from './components/admin/Dashboard';
 
 import AdminRoute from "./utils/AdminRoute";
 
@@ -44,7 +45,8 @@ function App() {
           <Route path="/product/:id" exact component={ProductInfo} />
           <Route path="/cart" exact component={Cart} />
           <Route path="/test" exact component={Testing} />
-          <AdminRoute path="/addProduct" exact component={AddProduct} />
+          <AdminRoute path="/admin/dashboard" exact component={Dashboard} />
+          <AdminRoute path="/admin/addproduct" exact component={AddProduct} />
         </div>
       </Router>
     </Provider>

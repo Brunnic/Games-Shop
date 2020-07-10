@@ -54,7 +54,7 @@ const AddProduct = ({ addProduct, history, loading, isAuthenticated }) => {
                             <input type="text" name="desc" className="form-control" id="desc" aria-describedby="desc" onChange={onChange} value={desc} />
                         </div>
                         <div className="form-group col-md-6">
-                            <label htmlFor="config">Config</label>
+                            <label htmlFor="config">Config (can be html)</label>
                             <input type="text" name="config" className="form-control" id="config" aria-describedby="config" onChange={onChange} value={config} />
                         </div>
                         <div className="form-group col-12">

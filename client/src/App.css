@@ -1,9 +1,11 @@
 body {
-  background-color: grey;
+  background-color: #272829;
+  color: white;
 }
 
 .navbar {
   min-height: 60px;
+  font-size: 16px;
 }
 
 .search-box {
@@ -44,7 +46,8 @@ body {
 }
 
 .cart-item:hover {
-  border: 0.5px solid #54534d;
+  border: 0.5px solid #c5c4bb;
+  background-color: #6c7074;
   border-radius: 10px;
 }
 

@@ -144,9 +144,35 @@ METHOD DELETE
 DESC clear cart
 */
 
-router.delete("/cart/clear", async (req, res) => {
-    res.cookie("shopping-cart", [], { httpOnly: true, sameSite: true });
+router.delete("/cart/clear", async (req, res, next) => {
+    if(!req.user && !req.cookies["access-token"]) {
+        res.cookie("shopping-cart", [], { httpOnly: true, sameSite: true });
+    }
 
+    else {
+        passport.authenticate("jwt", { session: false }, async (err, user, info) => {
+            if(err) return res.status(500).json({ error: err });
+        
+            if(!user) return res.status(400).json({ error: info });
+        
+            req.logIn(user, (err) => {
+              if(err) {
+                res.status(500).json({ msg: "Internal Error" });
+                throw err;
+              }
+            });
+            try {
+                const user = await User.findById(req.user._id);
+
+                user.cart = [];
+
+                user.save();
+
+            } catch (err) {
+                return res.status(500).json({ error: err.message });
+            }
+        })(req, res, next);
+    }
     res.json({ msg: "Cleared Cart" });
 });
 
@@ -156,24 +182,52 @@ METHOD DELETE
 DESC remove product from cart
 */
 
-router.delete("/cart/remove/:title", async (req, res) => {
-    
-    try {
-        const title = req.params.title;
+router.delete("/cart/remove/:title", async (req, res, next) => {
+    const title = req.params.title;
+    var items = [];
+
+    if(!req.user && !req.cookies["access-token"]) {
+        
 
         const cart = req.cookies["shopping-cart"];
 
-        const items = cart.filter((product) => {
-            return product.title === title;
+        items = cart.filter((product) => {
+            return product.title !== title;
         });
 
         res.cookie("shopping-cart", items, { httpOnly: true, sameSite: true });
 
-        res.json(items)
-    } catch (err) {
-        return res.status(500).json({ error: err.message });
+        return res.json(items)
     }
 
+    else {
+        passport.authenticate("jwt", { session: false }, async (err, user, info) => {
+            if(err) return res.status(500).json({ error: err });
+        
+            if(!user) return res.status(400).json({ error: info });
+        
+            req.logIn(user, (err) => {
+              if(err) {
+                res.status(500).json({ msg: "Internal Error" });
+                throw err;
+              }
+            });
+            try {
+                const user = await User.findById(req.user._id);
+
+                user.cart = user.cart.filter((product) => {
+                    return product.title !== title;
+                })
+
+                user.save();
+
+                res.json(user.cart)
+
+            } catch (err) {
+                return res.status(500).json({ error: err.message });
+            }
+        })(req, res, next);
+    }
 
 });
 

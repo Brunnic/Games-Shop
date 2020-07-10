@@ -8,7 +8,7 @@ const reload = () => {
     window.location.reload();
 }
 
-const Dropdown = ({ email, history, logout }) => (
+const Dropdown = ({ email, history, logout, user }) => (
     <div className="navbar-nav mr-auto">
         <div className="dropdown">
         <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
@@ -17,6 +17,7 @@ const Dropdown = ({ email, history, logout }) => (
         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <Link to="#" className="dropdown-item">Profile</Link>
             <Link to="#" className="dropdown-item">Wishlist</Link>
+            {user.role === "admin" ? <Link to="/admin/dashboard" className="dropdown-item">Admin Dashboard</Link> : ""}
             <div onClick={(e) => {
                         logout(history, reload);
                     }} className="dropdown-item">Disconnect</div>
@@ -38,7 +39,7 @@ const AuthItems = () => (
 
 const Navbar = ({ loading, isAuthenticated, user, history, logout, cart }) => {
     return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <Link className="navbar-brand" to="/">Games Shop</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -69,7 +70,7 @@ const Navbar = ({ loading, isAuthenticated, user, history, logout, cart }) => {
             </ul> */}
             {
                 loading ? "Loading..." : (isAuthenticated ? 
-                        <Dropdown email={user.email} history={history} logout={logout} />
+                        <Dropdown email={user.email} history={history} logout={logout} user={user} />
                         :
                         <AuthItems />
                     )

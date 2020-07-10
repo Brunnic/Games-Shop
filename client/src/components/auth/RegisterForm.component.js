@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
 
 import { register } from "../../actions/auth";
 
 const Register = ({ register, history, isAuthenticated }) => {
+  useEffect(() => {
+    document.title = "Register"
+  }, []);
+
   const [form, setForm] = useState({ email: "", password: ""});
 
   const { email, password} = form;

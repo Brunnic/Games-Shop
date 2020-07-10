@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
 
@@ -6,6 +6,9 @@ import { login } from "../../actions/auth";
 import { getCart } from "../../actions/cart";
 
 const Login = ({ login, history, isAuthenticated, getCart }) => {
+  useEffect(() => {
+    document.title = "Login"
+  }, []);
   const [form, setForm] = useState({email: "", password: ""});
 
   const { email, password} = form;
